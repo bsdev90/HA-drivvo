@@ -1,0 +1,14 @@
+{
+  "domain": "drivvo",
+  "name": "Drivvo",
+  "codeowners": [
+    "@oOBenjaminOo"
+  ],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/oOBenjaminOo/HA-drivvo#readme",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/oOBenjaminOo/HA-drivvo/issues",
+  "requirements": [],
+  "version": "3.1.1-beta.1"
+}

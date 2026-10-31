@@ -1,0 +1,20 @@
+[
+  {
+    "id_veiculo": 100,
+    "ativo": true,
+    "nome": "My Car",
+    "placa": "ABC1234",
+    "marca": "VW",
+    "modelo": "Gol",
+    "unidade_distancia": 1
+  },
+  {
+    "id_veiculo": 200,
+    "ativo": false,
+    "nome": "Old Car",
+    "placa": null,
+    "marca": "Fiat",
+    "modelo": "Uno",
+    "unidade_distancia": 1
+  }
+]

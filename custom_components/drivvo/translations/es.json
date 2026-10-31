@@ -1,0 +1,204 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Conectar a Drivvo",
+        "description": "Introduzca las credenciales de tu cuenta:",
+        "data": {
+          "email": "E-mail",
+          "password": "Contraseña"
+        }
+      },
+      "vehicle": {
+        "description": "Seleccione los vehículos que quiere añadir a la integración:",
+        "data": {
+          "vehicles": "Vehículos"
+        }
+      },
+      "reauth_confirm": {
+        "data": {
+          "email": "E-mail",
+          "password": "Contraseña"
+        }
+      }
+    },
+    "error": {
+      "auth_error": "Autenticación incorrecta",
+      "cannot_connect": "Error al conectar",
+      "invalid_auth": "Autenticación incorrecta",
+      "unknown": "Error inesperado"
+    },
+    "abort": {
+      "already_configured": "Esta cuenta ya ha sido configurada.",
+      "reauth_successful": "Reautenticación existosa."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "refuellings": {
+        "name": "Repostajes",
+        "state_attributes": {
+          "vehicle": {
+            "name": "Vehículo"
+          },
+          "odometer": {
+            "name": "Último cuentakilómetros"
+          },
+          "odometer_date": {
+            "name": "Fecha del último cuentakilómetros"
+          },
+          "refuelling_last_average": {
+            "name": "Última media de combustible"
+          },
+          "refuelling_general_average": {
+            "name": "Media general de combustible"
+          },
+          "refuelling_station": {
+            "name": "Estación de servicio"
+          },
+          "refuelling_type": {
+            "name": "Tipo de combustible"
+          },
+          "refuelling_reason": {
+            "name": "Razón de repostaje"
+          },
+          "refuelling_date": {
+            "name": "Fecha de repostaje"
+          },
+          "refuelling_odometer": {
+            "name": "Cuentakilómetros del repostaje"
+          },
+          "refuelling_value": {
+            "name": "Costo del repostaje"
+          },
+          "refuelling_price": {
+            "name": "Precio del combustible"
+          },
+          "refuelling_total": {
+            "name": "Total de repostajes"
+          },
+          "refuelling_value_total": {
+            "name": "Costo total de repostajes"
+          },
+          "refuelling_tank_full": {
+            "name": "Tanque lleno",
+            "state": {
+              "false": "No",
+              "true": "Si"
+            }
+          },
+          "refuelling_distance": {
+            "name": "Distancia recorrida desde el último repostaje"
+          },
+          "refuelling_price_lowest": {
+            "name": "Precio de combustible más barato"
+          },
+          "refuelling_volume": {
+            "name": "Volumen del último repostaje"
+          },
+          "refuelling_volume_total": {
+            "name": "Volumen del total de repostajes"
+          }
+        }
+      },
+      "vehicle": {
+        "name": "Vehículo"
+      },
+      "odometer": {
+        "name": "Cuentakilómetros"
+      },
+      "odometer_date": {
+        "name": "Fecha del cuentakilómetros"
+      },
+      "refuelling_last_average": {
+        "name": "Última media de combustible"
+      },
+      "refuelling_general_average": {
+        "name": "Media general de combustible"
+      },
+      "refuelling_station": {
+        "name": "Estación de servicio"
+      },
+      "refuelling_type": {
+        "name": "Tipo de combustible"
+      },
+      "refuelling_reason": {
+        "name": "Razón de repostaje"
+      },
+      "refuelling_date": {
+        "name": "Fecha de repostaje"
+      },
+      "refuelling_odometer": {
+        "name": "Cuentakilómetros del repostaje"
+      },
+      "refuelling_value": {
+        "name": "Costo del repostaje"
+      },
+      "refuelling_price": {
+        "name": "Precio del combustible"
+      },
+      "refuelling_value_total": {
+        "name": "Costo total de repostajes"
+      },
+      "refuelling_tank_full": {
+        "name": "Tanque lleno"
+      },
+      "refuelling_distance": {
+        "name": "Distancia recorrida desde el último repostaje"
+      },
+      "refuelling_price_lowest": {
+        "name": "Combustible más barato"
+      },
+      "refuelling_volume": {
+        "name": "Volumen del último repostaje"
+      },
+      "refuelling_volume_total": {
+        "name": "Volumen total de repostajes"
+      },
+      "odometer_value": {
+        "name": "Valor del cuentakilómetros"
+      },
+      "odometer_avg_consumption": {
+        "name": "Consumo medio"
+      },
+      "expenses": {
+        "name": "Gastos"
+      },
+      "expenses_unic": {
+        "name": "Gastos únicos"
+      }
+    }
+  },
+  "issues": {
+    "yaml_deprecated": {
+      "title": "Configuración YAML de Drivvo está obsoleta",
+      "description": "La configuración de Drivvo a través de YAML está obsoleta.\n\nSu configuración ha sido importada a la interfaz de usuario (UI) y puede eliminarse del archivo `configuration.yaml` y hacer un reinicio de Home Assistant."
+    },
+    "import_already_configured": {
+      "title": "La cuenta {email} ya existe",
+      "description": "La cuenta {email} ya existe y por tanto no ha sido importada.\n\nPuede eliminar la configuración del archivo `configuration.yaml`."
+    },
+    "vehicle_non_existent": {
+      "title": "El vehículo con ID {vehicle} no existe en la aplicación de Drivvo",
+      "description": "El vehículo con ID {vehicle} no existe en la aplicación de Drivvo, puede haber sido borrado.\n\nVaya a las opciones de configuración de la integración y elimine el vehículo."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "email": "E-mail",
+          "password": "Contraseña",
+          "vehicles": "Vehículos",
+          "no_vehicles": "No existen vehículos activos en esta cuenta."
+        }
+      }
+    },
+    "abort": {
+      "changes_successful": "Cambios correctamente guardados."
+    },
+    "error": {
+      "auth_error": "Autenticación incorrecta"
+    }
+  }
+}

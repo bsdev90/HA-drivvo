@@ -1,0 +1,207 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Kapcsolódás a Drivvohoz",
+        "description": "Adja meg a fiókadatait:",
+        "data": {
+          "email": "E-mail",
+          "password": "Jelszó"
+        }
+      },
+      "vehicle": {
+        "description": "Válassza ki az integrációhoz hozzáadni kívánt járműveket:",
+        "data": {
+          "vehicles": "Járművek"
+        }
+      },
+      "reauth_confirm": {
+        "data": {
+          "email": "E-mail",
+          "password": "Jelszó"
+        }
+      }
+    },
+    "error": {
+      "auth_error": "Érvénytelen hitelesítés",
+      "cannot_connect": "Nem sikerült csatlakozni",
+      "invalid_auth": "Érvénytelen hitelesítés",
+      "unknown": "Váratlan hiba"
+    },
+    "abort": {
+      "already_configured": "A fiók már konfigurálva van",
+      "reauth_successful": "Az újrahitelesítés sikeres."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "refuellings": {
+        "name": "Tankolások",
+        "state_attributes": {
+          "vehicle": {
+            "name": "Jármű"
+          },
+          "odometer": {
+            "name": "Utolsó kilométeróra-állás"
+          },
+          "odometer_date": {
+            "name": "Utolsó kilométeróra-állás dátuma"
+          },
+          "refuelling_last_average": {
+            "name": "Utolsó fogyasztási átlag"
+          },
+          "refuelling_general_average": {
+            "name": "Általános fogyasztási átlag"
+          },
+          "refuelling_station": {
+            "name": "Töltőállomás"
+          },
+          "refuelling_type": {
+            "name": "Üzemanyag típusa"
+          },
+          "refuelling_reason": {
+            "name": "Tankolás oka"
+          },
+          "refuelling_date": {
+            "name": "Tankolás dátuma"
+          },
+          "refuelling_odometer": {
+            "name": "Kilométeróra-állás tankoláskor"
+          },
+          "refuelling_value": {
+            "name": "Tankolás összege"
+          },
+          "refuelling_price": {
+            "name": "Üzemanyag ára"
+          },
+          "refuelling_total": {
+            "name": "Tankolások száma összesen"
+          },
+          "refuelling_value_total": {
+            "name": "Tankolások összértéke"
+          },
+          "refuelling_tank_full": {
+            "name": "Tele tank",
+            "state": {
+              "false": "Nem",
+              "true": "Igen"
+            }
+          },
+          "refuelling_distance": {
+            "name": "Az utolsó tankolás óta megtett távolság"
+          },
+          "refuelling_price_lowest": {
+            "name": "Legalacsonyabb üzemanyagár"
+          },
+          "refuelling_volume": {
+            "name": "Utolsó tankolt mennyiség"
+          },
+          "refuelling_volume_total": {
+            "name": "Tankolt mennyiség összesen"
+          }
+        }
+      },
+      "refuelling_total": {
+        "name": "Tankolások összesen"
+      },
+      "vehicle": {
+        "name": "Jármű"
+      },
+      "odometer": {
+        "name": "Kilométeróra-állás"
+      },
+      "odometer_date": {
+        "name": "Kilométeróra dátuma"
+      },
+      "refuelling_last_average": {
+        "name": "Utolsó fogyasztási átlag"
+      },
+      "refuelling_general_average": {
+        "name": "Általános fogyasztási átlag"
+      },
+      "refuelling_station": {
+        "name": "Töltőállomás"
+      },
+      "refuelling_type": {
+        "name": "Üzemanyag típusa"
+      },
+      "refuelling_reason": {
+        "name": "Tankolás oka"
+      },
+      "refuelling_date": {
+        "name": "Tankolás dátuma"
+      },
+      "refuelling_odometer": {
+        "name": "Kilométeróra-állás tankoláskor"
+      },
+      "refuelling_value": {
+        "name": "Tankolás összege"
+      },
+      "refuelling_price": {
+        "name": "Üzemanyag ára"
+      },
+      "refuelling_value_total": {
+        "name": "Tankolások összértéke"
+      },
+      "refuelling_tank_full": {
+        "name": "Tele tank"
+      },
+      "refuelling_distance": {
+        "name": "Megtett távolság"
+      },
+      "refuelling_price_lowest": {
+        "name": "Legalacsonyabb üzemanyagár"
+      },
+      "refuelling_volume": {
+        "name": "Tankolt mennyiség"
+      },
+      "refuelling_volume_total": {
+        "name": "Tankolt mennyiség összesen"
+      },
+      "odometer_value": {
+        "name": "Kilométeróra-érték"
+      },
+      "odometer_avg_consumption": {
+        "name": "Átlagfogyasztás"
+      },
+      "expenses": {
+        "name": "Költségek"
+      },
+      "expenses_unic": {
+        "name": "Egyedi költségek"
+      }
+    }
+  },
+  "issues": {
+    "yaml_deprecated": {
+      "title": "A Drivvo YAML konfiguráció megszűnik",
+      "description": "A Drivvo YAML-alapú konfigurálása megszűnik. A meglévő YAML konfiguráció automatikusan importálásra került a felhasználói felületre. A probléma megoldásához távolítsa el a Drivvo YAML konfigurációt a configuration.yaml fájlból."
+    },
+    "import_already_configured": {
+      "title": "A(z) {email} fiók már létezik",
+      "description": "A(z) {email} fiók már létezik, ezért nem került importálásra.\n\nEltávolíthatja a konfigurációt a `configuration.yaml` fájlból."
+    },
+    "vehicle_non_existent": {
+      "title": "A jármű nem található",
+      "description": "A(z) {vehicle} jármű nem található a Drivvo fiókjában."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "email": "E-mail",
+          "password": "Jelszó",
+          "vehicles": "Járművek",
+          "no_vehicles": "Ehhez a fiókhoz nem tartozik aktív jármű."
+        }
+      }
+    },
+    "abort": {
+      "changes_successful": "A módosítások sikeresen mentve."
+    },
+    "error": {
+      "auth_error": "Érvénytelen hitelesítés"
+    }
+  }
+}

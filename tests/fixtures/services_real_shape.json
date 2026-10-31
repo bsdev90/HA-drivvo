@@ -1,0 +1,16 @@
+[
+  {
+    "id_servico": 4355612,
+    "id_veiculo": 100,
+    "odometro": 70200,
+    "data": "2021-11-06 12:16:46",
+    "titulo": null,
+    "observacao": "Semi synthetic oil",
+    "id_local": 2099099,
+    "local": {"id_local": 2099099, "nome": "Ari Auto Parts"},
+    "tipos_servico": [
+      {"id_servico_tipo_servico": 8022716, "id_tipo_servico": 99302742, "valor": 137, "nome": "Oil change"},
+      {"id_servico_tipo_servico": 8022741, "id_tipo_servico": 99302762, "valor": 31, "nome": "Lights"}
+    ]
+  }
+]

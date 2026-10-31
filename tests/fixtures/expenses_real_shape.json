@@ -1,0 +1,11 @@
+[
+  {
+    "id_despesa": 771,
+    "id_veiculo": 100,
+    "odometro": 71000,
+    "data": "2022-01-10 09:00:00",
+    "tipos_despesa": [
+      {"id_despesa_tipo_despesa": 91, "id_tipo_despesa": 5501, "valor": 850.5, "nome": "IPVA"}
+    ]
+  }
+]

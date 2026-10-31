@@ -1,0 +1,314 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Drivvo",
+        "description": "Enter your account information:",
+        "data": {
+          "email": "Email",
+          "password": "Password"
+        }
+      },
+      "vehicle": {
+        "description": "Select the vehicles you want to add to the integration:",
+        "data": {
+          "vehicles": "Vehicles"
+        }
+      },
+      "reauth_confirm": {
+        "data": {
+          "email": "E-mail",
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "auth_error": "Invalid authentication",
+      "cannot_connect": "Failed to connect",
+      "invalid_auth": "Invalid authentication",
+      "unknown": "Unexpected error"
+    },
+    "abort": {
+      "already_configured": "Account is already configured",
+      "reauth_successful": "Reauthentication successful."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "refuellings": {
+        "name": "Refuellings",
+        "state_attributes": {
+          "vehicle": {
+            "name": "Vehicle"
+          },
+          "odometer": {
+            "name": "Last odometer"
+          },
+          "odometer_date": {
+            "name": "Date of last odometer"
+          },
+          "refuelling_last_average": {
+            "name": "Last fuel average"
+          },
+          "refuelling_general_average": {
+            "name": "General fuel average"
+          },
+          "refuelling_station": {
+            "name": "Fuel station"
+          },
+          "refuelling_type": {
+            "name": "Type of fuel"
+          },
+          "refuelling_reason": {
+            "name": "Refuelling reason"
+          },
+          "refuelling_date": {
+            "name": "Date refuelling"
+          },
+          "refuelling_odometer": {
+            "name": "Odometer refuelling"
+          },
+          "refuelling_value": {
+            "name": "Value refuelling"
+          },
+          "refuelling_price": {
+            "name": "Fuel price"
+          },
+          "refuelling_total": {
+            "name": "Total refuellings"
+          },
+          "refuelling_value_total": {
+            "name": "Total value refuellings"
+          },
+          "refuelling_tank_full": {
+            "name": "Tank full",
+            "state": {
+              "false": "No",
+              "true": "Yes"
+            }
+          },
+          "refuelling_distance": {
+            "name": "Distance traveled since the last refueling"
+          },
+          "refuelling_price_lowest": {
+            "name": "Cheaper fuel"
+          },
+          "refuelling_volume": {
+            "name": "Last refueling volume"
+          },
+          "refuelling_volume_total": {
+            "name": "Total volume refuelings"
+          }
+        }
+      },
+      "refuelling_total": {
+        "name": "Refuelling Total"
+      },
+      "vehicle": {
+        "name": "Vehicle"
+      },
+      "odometer": {
+        "name": "Odometer"
+      },
+      "odometer_date": {
+        "name": "Odometer Date"
+      },
+      "refuelling_last_average": {
+        "name": "Refuelling Last Average"
+      },
+      "refuelling_general_average": {
+        "name": "Refuelling General Average"
+      },
+      "refuelling_station": {
+        "name": "Refuelling Station"
+      },
+      "refuelling_type": {
+        "name": "Refuelling Type"
+      },
+      "refuelling_reason": {
+        "name": "Refuelling Reason"
+      },
+      "refuelling_date": {
+        "name": "Refuelling Date"
+      },
+      "refuelling_odometer": {
+        "name": "Refuelling Odometer"
+      },
+      "refuelling_value": {
+        "name": "Refuelling Value"
+      },
+      "refuelling_price": {
+        "name": "Refuelling Price"
+      },
+      "refuelling_value_total": {
+        "name": "Refuelling Value Total"
+      },
+      "refuelling_tank_full": {
+        "name": "Refuelling Tank Full"
+      },
+      "refuelling_distance": {
+        "name": "Refuelling Distance"
+      },
+      "refuelling_price_lowest": {
+        "name": "Refuelling Price Lowest"
+      },
+      "refuelling_volume": {
+        "name": "Refuelling Volume"
+      },
+      "refuelling_volume_total": {
+        "name": "Refuelling Volume Total"
+      },
+      "odometer_value": {
+        "name": "Odometer value"
+      },
+      "odometer_avg_consumption": {
+        "name": "Odometer average consumption"
+      },
+      "expenses": {
+        "name": "Expenses"
+      },
+      "expenses_unic": {
+        "name": "Expenses unique"
+      },
+      "refuelling_cost_distance": {
+        "name": "Custo de Combustível por Distância"
+      },
+      "cost_total": {
+        "name": "Custo Total"
+      },
+      "refuelling_payment": {
+        "name": "Forma de Pagamento do Abastecimento"
+      },
+      "fuel_level": {
+        "name": "Nível de Combustível"
+      },
+      "fuel_remaining": {
+        "name": "Combustível Restante"
+      },
+      "fuel_range": {
+        "name": "Autonomia"
+      },
+      "tank_volume": {
+        "name": "Volume do Tanque"
+      },
+      "license_plate": {
+        "name": "Placa"
+      },
+      "charge_battery_start": {
+        "name": "Bateria no Início da Recarga"
+      },
+      "charge_battery_end": {
+        "name": "Bateria no Fim da Recarga"
+      },
+      "charge_duration": {
+        "name": "Duração da Recarga"
+      },
+      "charge_energy": {
+        "name": "Energia da Recarga"
+      },
+      "service_place": {
+        "name": "Local do Serviço"
+      },
+      "expense_odometer": {
+        "name": "Odômetro da Despesa"
+      },
+      "income_total": {
+        "name": "Total de Receitas"
+      },
+      "income_date": {
+        "name": "Data da Receita"
+      },
+      "income_value": {
+        "name": "Valor da Receita"
+      },
+      "income_value_total": {
+        "name": "Valor Total de Receitas"
+      },
+      "route_total": {
+        "name": "Total de Percursos"
+      },
+      "route_distance_total": {
+        "name": "Distância Total de Percursos"
+      },
+      "reading_total": {
+        "name": "Total de Leituras"
+      },
+      "reading_date": {
+        "name": "Data da Leitura"
+      },
+      "reading_odometer": {
+        "name": "Odômetro da Leitura"
+      },
+      "checklist_total": {
+        "name": "Total de Checklists"
+      },
+      "checklist_date": {
+        "name": "Data do Checklist"
+      },
+      "reminder_next_description": {
+        "name": "Próximo Lembrete"
+      },
+      "reminder_next_date": {
+        "name": "Data do Próximo Lembrete"
+      },
+      "reminder_next_odometer": {
+        "name": "Odômetro do Próximo Lembrete"
+      },
+      "reminder_next_days": {
+        "name": "Dias até o Próximo Lembrete"
+      },
+      "reminder_next_distance": {
+        "name": "Distância até o Próximo Lembrete"
+      },
+      "reminders_total": {
+        "name": "Total de Lembretes"
+      },
+      "reminders_overdue": {
+        "name": "Lembretes Atrasados"
+      },
+      "driver_license_expiry": {
+        "name": "Vencimento da CNH"
+      }
+    },
+    "binary_sensor": {
+      "maintenance_due": {
+        "name": "Manutenção Pendente"
+      },
+      "tank_full": {
+        "name": "Último Abastecimento com Tanque Cheio"
+      }
+    }
+  },
+  "issues": {
+    "yaml_deprecated": {
+      "title": "Drivvo YAML configuration is being removed",
+      "description": "Configuring Drivvo using YAML is being removed. Your existing YAML configuration has been imported into the UI automatically. Remove the Drivvo YAML configuration from your configuration.yaml file to resolve this issue."
+    },
+    "import_already_configured": {
+      "title": "Account {email} already exists",
+      "description": "Account {email} already exists and therefore was not imported.\n\nYou can remove the configuration from your `configuration.yaml` file."
+    },
+    "vehicle_non_existent": {
+      "title": "Vehicle not found",
+      "description": "The vehicle {vehicle} could not be found in your Drivvo account."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "email": "E-mail",
+          "password": "Password",
+          "vehicles": "Vehicles",
+          "no_vehicles": "There are no active vehicles on this account."
+        }
+      }
+    },
+    "abort": {
+      "changes_successful": "Changes successfully saved."
+    },
+    "error": {
+      "auth_error": "Invalid authentication"
+    }
+  }
+}

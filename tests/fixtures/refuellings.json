@@ -1,0 +1,24 @@
+[
+  {
+    "data": "2025-05-10 12:00:00",
+    "odometro": 12500,
+    "volume": 30.0,
+    "preco": 6.0,
+    "valor_total": 180.0,
+    "combustivel": "Gasolina",
+    "tipo_motivo": 1,
+    "tanque_cheio": true,
+    "posto_combustivel": {"nome": "Shell"}
+  },
+  {
+    "data": "2025-05-01 12:00:00",
+    "odometro": 12200,
+    "volume": 28.0,
+    "preco": 5.8,
+    "valor_total": 162.4,
+    "combustivel": "Gasolina",
+    "tipo_motivo": 1,
+    "tanque_cheio": true,
+    "posto_combustivel": {"nome": "Shell"}
+  }
+]

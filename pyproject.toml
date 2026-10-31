@@ -1,0 +1,6 @@
+[tool.pytest.ini_options]
+# "auto" is required because pytest-homeassistant-custom-component's async
+# fixtures (e.g. `hass`) are not decorated with @pytest_asyncio.fixture, so
+# pytest-asyncio 0.23 in strict mode injects the generator object instead of
+# the resolved value.  All existing tests continue to pass in auto mode.
+asyncio_mode = "auto"

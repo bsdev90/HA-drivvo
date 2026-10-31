@@ -1,0 +1,8 @@
+{
+  "id_veiculo": 100,
+  "nome": "My Car",
+  "placa": "ABC1234",
+  "marca": "VW",
+  "modelo": "Gol",
+  "unidade_distancia": 1
+}

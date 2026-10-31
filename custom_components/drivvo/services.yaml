@@ -1,0 +1,264 @@
+add_refuelling:
+  name: Add refuelling
+  description: Log a refuelling in Drivvo.
+  fields:
+    vehicle_id:
+      name: Vehicle
+      description: Drivvo vehicle id, as configured in the integration.
+      required: true
+      example: "4611323"
+      selector:
+        text:
+    odometer:
+      name: Odometer
+      description: Odometer at the moment of the refuelling.
+      required: true
+      example: 78703
+      selector:
+        number:
+          min: 0
+          max: 9999999
+          mode: box
+    total_value:
+      name: Total value
+      description: Amount paid. Give at least two of total value, price and volume.
+      example: 227.74
+      selector:
+        number:
+          min: 0
+          step: 0.01
+          mode: box
+    price:
+      name: Price
+      description: Price per unit of volume.
+      example: 5.99
+      selector:
+        number:
+          min: 0
+          step: 0.001
+          mode: box
+    volume:
+      name: Volume
+      description: Volume refuelled.
+      example: 38.02
+      selector:
+        number:
+          min: 0
+          step: 0.001
+          mode: box
+    full_tank:
+      name: Full tank
+      description: Whether the tank was filled up. Consumption is only measured between full tanks.
+      default: true
+      selector:
+        boolean:
+    fuel:
+      name: Fuel
+      description: Name of the fuel as registered in Drivvo. Defaults to the first registered fuel.
+      example: Gas. Comum
+      selector:
+        text:
+    station:
+      name: Station
+      description: Name of the fuel station as registered in Drivvo.
+      example: Posto Natal II
+      selector:
+        text:
+    date:
+      name: Date
+      description: When it happened. Defaults to now.
+      selector:
+        datetime:
+    note:
+      name: Note
+      description: Free text stored with the record.
+      selector:
+        text:
+
+add_reading:
+  name: Add odometer reading
+  description: Log an odometer reading in Drivvo.
+  fields:
+    vehicle_id:
+      name: Vehicle
+      description: Drivvo vehicle id, as configured in the integration.
+      required: true
+      example: "4611323"
+      selector:
+        text:
+    odometer:
+      name: Odometer
+      description: Odometer value to record.
+      required: true
+      example: 81000
+      selector:
+        number:
+          min: 0
+          max: 9999999
+          mode: box
+    date:
+      name: Date
+      description: When it was read. Defaults to now.
+      selector:
+        datetime:
+    note:
+      name: Note
+      description: Free text stored with the record.
+      selector:
+        text:
+
+add_expense:
+  name: Add expense
+  description: Log an expense in Drivvo.
+  fields:
+    vehicle_id:
+      name: Vehicle
+      description: Drivvo vehicle id, as configured in the integration.
+      required: true
+      example: "4611323"
+      selector:
+        text:
+    type:
+      name: Type
+      description: Expense type name as registered in Drivvo.
+      required: true
+      example: IPVA
+      selector:
+        text:
+    value:
+      name: Value
+      description: Amount paid.
+      required: true
+      example: 850.00
+      selector:
+        number:
+          min: 0
+          step: 0.01
+          mode: box
+    odometer:
+      name: Odometer
+      description: Odometer at the moment of the expense.
+      selector:
+        number:
+          min: 0
+          max: 9999999
+          mode: box
+    date:
+      name: Date
+      description: When it happened. Defaults to now.
+      selector:
+        datetime:
+    note:
+      name: Note
+      description: Free text stored with the record.
+      selector:
+        text:
+
+add_service:
+  name: Add service
+  description: Log a service in Drivvo.
+  fields:
+    vehicle_id:
+      name: Vehicle
+      description: Drivvo vehicle id, as configured in the integration.
+      required: true
+      example: "4611323"
+      selector:
+        text:
+    type:
+      name: Type
+      description: Service type name as registered in Drivvo.
+      required: true
+      example: Troca de Óleo
+      selector:
+        text:
+    value:
+      name: Value
+      description: Amount paid.
+      required: true
+      example: 137.00
+      selector:
+        number:
+          min: 0
+          step: 0.01
+          mode: box
+    odometer:
+      name: Odometer
+      description: Odometer at the moment of the service.
+      selector:
+        number:
+          min: 0
+          max: 9999999
+          mode: box
+    place:
+      name: Place
+      description: Name of the place as registered in Drivvo.
+      example: Ari Auto Peças
+      selector:
+        text:
+    date:
+      name: Date
+      description: When it happened. Defaults to now.
+      selector:
+        datetime:
+    note:
+      name: Note
+      description: Free text stored with the record.
+      selector:
+        text:
+
+add_income:
+  name: Add income
+  description: Log an income in Drivvo.
+  fields:
+    vehicle_id:
+      name: Vehicle
+      description: Drivvo vehicle id, as configured in the integration.
+      required: true
+      example: "4611323"
+      selector:
+        text:
+    value:
+      name: Value
+      description: Amount received.
+      required: true
+      example: 120.00
+      selector:
+        number:
+          min: 0
+          step: 0.01
+          mode: box
+    type:
+      name: Type
+      description: Income type name as registered in Drivvo.
+      selector:
+        text:
+    odometer:
+      name: Odometer
+      description: Odometer at the moment of the income.
+      selector:
+        number:
+          min: 0
+          max: 9999999
+          mode: box
+    date:
+      name: Date
+      description: When it happened. Defaults to now.
+      selector:
+        datetime:
+    note:
+      name: Note
+      description: Free text stored with the record.
+      selector:
+        text:
+
+refresh:
+  name: Refresh
+  description: Fetch Drivvo data again, without waiting for the next scheduled update.
+  fields:
+    vehicle_id:
+      name: Vehicle
+      description: Drivvo vehicle id. Omit to refresh every configured vehicle.
+      example: "4611323"
+      selector:
+        text:
