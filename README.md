@@ -14,7 +14,7 @@ Maintained by [Benjamin (@oOBenjaminOo)](https://github.com/oOBenjaminOo), based
 
 This repository is being prepared for HACS. **It is not currently included in the default HACS catalogue.** Add it as a custom Integration repository for testing.
 
-### 3.1.1-beta.1
+### 3.1.1
 
 - Correct remaining-fuel device classes to `volume_storage` / `energy_storage`; retain measurement statistics, entity IDs and units.
 - Restore and adapt upstream HTTP mocks to current aiohttp; include all optional API endpoints in fixtures.

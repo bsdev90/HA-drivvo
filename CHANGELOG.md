@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.1.1-beta.1 - 2026-10-31
+## 3.1.1 - 2026-10-31
 
 First maintained continuation of upstream 3.1.0.
 
