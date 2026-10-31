@@ -50,7 +50,7 @@ Have HACS installed, this will allow you to update easily.
 
 Adding Drivvo to HACS can be using this button:
 
-[![image](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=hudsonbrendon&repository=HA-drivvo&category=integration)
+[![image](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=oOBenjaminOo&repository=HA-drivvo&category=integration)
 
 If the button above doesn't work, add `https://github.com/oOBenjaminOo/HA-drivvo` as a custom repository of type Integration in HACS.
 
