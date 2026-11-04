@@ -15,7 +15,6 @@ from homeassistant.helpers.issue_registry import (
     async_create_issue,
     async_delete_issue,
 )
-from homeassistant.helpers.update_coordinator import UpdateFailed
 
 from .api import DrivvoApiClient, DrivvoApiError, DrivvoAuthError
 from .const import (
@@ -43,11 +42,18 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     try:
         await client.login()
+        available_vehicles = await client.get_vehicles()
+        if not isinstance(available_vehicles, list) or any(
+            not isinstance(vehicle, dict) or "id_veiculo" not in vehicle
+            for vehicle in available_vehicles
+        ):
+            raise DrivvoApiError("Invalid vehicle list response")
     except DrivvoAuthError as err:
         raise ConfigEntryAuthFailed(str(err)) from err
     except DrivvoApiError as err:
         raise ConfigEntryNotReady(str(err)) from err
 
+    available_ids = {str(vehicle["id_veiculo"]) for vehicle in available_vehicles}
     coordinators: dict[str, DrivvoDataUpdateCoordinator] = {}
     for vehicle_id in entry.data.get(CONF_VEHICLES, []) or []:
         vid_str = str(vehicle_id)
@@ -55,12 +61,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         coord = DrivvoDataUpdateCoordinator(
             hass, client, vid_int, update_interval=SCAN_INTERVAL
         )
-        try:
-            await coord.async_config_entry_first_refresh()
-        except (UpdateFailed, ConfigEntryNotReady) as err:
-            _LOGGER.warning(
-                "Vehicle %s could not be loaded: %s — skipping", vid_str, err
-            )
+        if vid_str not in available_ids:
             async_create_issue(
                 hass,
                 DOMAIN,
@@ -71,6 +72,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                 translation_placeholders={"vehicle": vid_str},
             )
             continue
+        await coord.async_config_entry_first_refresh()
         async_delete_issue(hass, DOMAIN, f"{vid_str}_vehicle_non_existent")
         coordinators[vid_str] = coord
 

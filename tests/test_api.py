@@ -1,4 +1,5 @@
 """Tests for DrivvoApiClient."""
+
 import pytest
 from aiohttp import ClientSession
 
@@ -228,3 +229,35 @@ async def test_get_vehicle_handles_empty_or_malformed_currency_config(
         vehicle = await client.get_vehicle(100)
 
     assert vehicle.currency is None
+
+
+@pytest.mark.parametrize("operation", ["login", "get", "post"])
+@pytest.mark.parametrize("failure", ["connection", "timeout", "server"])
+async def test_transport_failures_are_api_errors(mock_aioresponse, operation, failure):
+    from aiohttp import ClientConnectionError
+
+    path = "/autenticacao/login" if operation == "login" else "/veiculo/web"
+    mock = mock_aioresponse.get if operation == "get" else mock_aioresponse.post
+    kwargs = (
+        {"status": 503}
+        if failure == "server"
+        else {
+            "exception": (
+                ClientConnectionError("offline")
+                if failure == "connection"
+                else TimeoutError()
+            )
+        }
+    )
+    mock(f"https://api.drivvo.com{path}", **kwargs)
+    async with ClientSession() as session:
+        client = DrivvoApiClient(session, "u", "p")
+        client.token = "token"
+        with pytest.raises(DrivvoApiError) as exc:
+            if operation == "login":
+                await client.login()
+            elif operation == "get":
+                await client.get_vehicles()
+            else:
+                await client._post_json(path, {})
+        assert not isinstance(exc.value, DrivvoAuthError)

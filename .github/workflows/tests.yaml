@@ -12,3 +12,43 @@ jobs:
           python-version: '3.14'
       - run: python -m pip install -r requirements_test.txt homeassistant==2026.10.4
       - run: python -m pytest -q
+
+  hacs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: hacs/action@main
+        with:
+          category: integration
+  hassfest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: home-assistant/actions/hassfest@master
+  release:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [pytest, hacs, hassfest]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+      - name: Publish validated version if not already released
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          version=$(python -c 'import json; print(json.load(open("custom_components/drivvo/manifest.json"))["version"])')
+          tag="v${version}"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "Release $tag already exists"
+            exit 0
+          fi
+          python - "$version" <<'PY'
+          import pathlib
+          import sys
+          version = sys.argv[1]
+          text = pathlib.Path("CHANGELOG.md").read_text()
+          section = next(part for part in text.split("\n## ")[1:] if part.startswith(version + " - "))
+          pathlib.Path("release-notes.md").write_text(section.split("\n", 1)[1].strip() + "\n")
+          PY
+          gh release create "$tag" --target "$GITHUB_SHA" --title "Drivvo $version" --notes-file release-notes.md --latest

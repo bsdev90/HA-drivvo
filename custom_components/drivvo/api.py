@@ -97,6 +97,8 @@ class DrivvoApiClient:
     async def login(self) -> str:
         try:
             return await self._login_inner()
+        except aiohttp.ClientError as err:
+            raise DrivvoApiError("Connection to Drivvo failed") from err
         except TimeoutError as err:
             raise DrivvoApiError("Login timed out") from err
 
@@ -130,6 +132,8 @@ class DrivvoApiClient:
         started = time.monotonic()
         try:
             return await self._get_json_inner(url, path)
+        except aiohttp.ClientError as err:
+            raise DrivvoApiError("Connection to Drivvo failed") from err
         except TimeoutError as err:
             raise DrivvoApiError(f"GET {path} timed out") from err
         finally:
@@ -165,6 +169,8 @@ class DrivvoApiClient:
     async def _post_json(self, path: str, payload: dict[str, Any]) -> Any:
         try:
             return await self._post_json_inner(path, payload)
+        except aiohttp.ClientError as err:
+            raise DrivvoApiError("Connection to Drivvo failed") from err
         except TimeoutError as err:
             raise DrivvoApiError(f"POST {path} timed out") from err
 

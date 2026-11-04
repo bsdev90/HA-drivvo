@@ -39,12 +39,13 @@ DATA_SCHEMA: vol.Schema = vol.Schema(
 class DrivvoOptionsFlowHandler(config_entries.OptionsFlow):
     """Config flow options for Drivvo."""
 
-    def __init__(self, config_entry: config_entries.ConfigEntry) -> None:
+    def __init__(self) -> None:
         """Initialize Drivvo options flow."""
-        self.config_entry: config_entries.ConfigEntry = config_entry
         self._client: DrivvoApiClient | None = None
 
-    async def async_step_init(self, user_input: dict[str, Any]) -> FlowResult:
+    async def async_step_init(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
         """Manage the options."""
 
         errors = {}
@@ -61,7 +62,9 @@ class DrivvoOptionsFlowHandler(config_entries.OptionsFlow):
                 await client.login()
                 auth_ok = True
             except DrivvoAuthError:
-                auth_ok = False
+                errors[CONF_PASSWORD] = "auth_error"
+            except DrivvoApiError:
+                errors["base"] = "cannot_connect"
             if auth_ok:
                 vehicles = user_input.get(CONF_VEHICLES, [])
 
@@ -98,8 +101,6 @@ class DrivvoOptionsFlowHandler(config_entries.OptionsFlow):
 
                 return self.async_abort(reason="changes_successful")
 
-            errors[CONF_PASSWORD] = "auth_error"
-
         if self._client is None:
             session = async_get_clientsession(self.hass)
             self._client = DrivvoApiClient(
@@ -109,12 +110,20 @@ class DrivvoOptionsFlowHandler(config_entries.OptionsFlow):
             )
             try:
                 await self._client.login()
-            except (DrivvoAuthError, DrivvoApiError):
+            except DrivvoAuthError:
+                errors.setdefault(CONF_PASSWORD, "auth_error")
+                self._client = None
+            except DrivvoApiError:
+                errors["base"] = "cannot_connect"
                 self._client = None
         if self._client is not None:
             try:
                 vehicles = await self._client.get_vehicles()
-            except (DrivvoAuthError, DrivvoApiError):
+            except DrivvoAuthError:
+                errors.setdefault(CONF_PASSWORD, "auth_error")
+                vehicles = []
+            except DrivvoApiError:
+                errors["base"] = "cannot_connect"
                 vehicles = []
         else:
             vehicles = []
@@ -226,14 +235,14 @@ class DrivvoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 await client.login()
                 auth_ok = True
             except DrivvoAuthError:
-                auth_ok = False
+                errors[CONF_PASSWORD] = "auth_error"
+            except DrivvoApiError:
+                errors["base"] = "cannot_connect"
             if auth_ok:
                 self.user = user_input.get(CONF_EMAIL)
                 self.password = user_input.get(CONF_PASSWORD)
                 self.client = client
                 return await self.async_step_vehicle()
-
-            errors[CONF_PASSWORD] = "auth_error"
 
         return self.async_show_form(
             step_id="user",
@@ -250,7 +259,7 @@ class DrivvoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     ) -> FlowResult:
         errors = {}
 
-        if user_input is not None:
+        if user_input is not None and CONF_VEHICLES in user_input:
             return self.async_create_entry(
                 title=self.user,
                 data={
@@ -260,7 +269,20 @@ class DrivvoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 },
             )
 
-        vehicles = await self.client.get_vehicles()
+        try:
+            vehicles = await self.client.get_vehicles()
+        except DrivvoAuthError:
+            return self.async_show_form(
+                step_id="user",
+                data_schema=DATA_SCHEMA,
+                errors={CONF_PASSWORD: "auth_error"},
+            )
+        except DrivvoApiError:
+            return self.async_show_form(
+                step_id="vehicle",
+                data_schema=vol.Schema({}),
+                errors={"base": "cannot_connect"},
+            )
         resource_vehicle = {}
         _LOGGER.debug("Veiculos: %s", vehicles)
         for vehicle in vehicles:
@@ -323,7 +345,9 @@ class DrivvoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 await reauth_client.login()
                 auth_ok = True
             except DrivvoAuthError:
-                auth_ok = False
+                errors[CONF_PASSWORD] = "auth_error"
+            except DrivvoApiError:
+                errors["base"] = "cannot_connect"
             if auth_ok:
                 self.hass.config_entries.async_update_entry(
                     self._reauth_entry,
@@ -337,8 +361,6 @@ class DrivvoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 await self.hass.config_entries.async_reload(self._reauth_entry.entry_id)
 
                 return self.async_abort(reason="reauth_successful")
-
-            errors[CONF_PASSWORD] = "auth_error"
 
         return self.async_show_form(
             step_id="reauth_confirm",
@@ -354,4 +376,4 @@ class DrivvoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         config_entry: config_entries.ConfigEntry,
     ) -> config_entries.OptionsFlow:
         """Options callback for Drivvo."""
-        return DrivvoOptionsFlowHandler(config_entry)
+        return DrivvoOptionsFlowHandler()

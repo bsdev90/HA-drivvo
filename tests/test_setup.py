@@ -22,6 +22,7 @@ from custom_components.drivvo.const import (
 VEHICLE_ID = "100"
 
 PAYLOADS = {
+    "/veiculo/web": [{"id_veiculo": 100}],
     f"/veiculo/{VEHICLE_ID}": {
         "id_veiculo": 100,
         "nome": "My Car",
@@ -181,3 +182,68 @@ async def test_unload_removes_the_services(hass, entry, enable_custom_integratio
 
     assert entry.state is ConfigEntryState.NOT_LOADED
     assert not hass.services.has_service(DOMAIN, "add_refuelling")
+
+
+@pytest.mark.parametrize("phase", ["login", "list", "refresh"])
+async def test_temporary_failure_retries_without_missing_vehicle_repair(
+    hass, entry, enable_custom_integrations, phase, freezer
+):
+    from custom_components.drivvo.api import DrivvoApiError
+    from homeassistant.helpers import issue_registry as ir
+
+    async def get_json(self, path):
+        if phase == "list" and path == "/veiculo/web":
+            raise DrivvoApiError("offline")
+        if phase == "refresh" and path == f"/veiculo/{VEHICLE_ID}":
+            raise DrivvoApiError("offline")
+        return PAYLOADS[path]
+
+    with (
+        patch.object(
+            DrivvoApiClient,
+            "login",
+            AsyncMock(
+                side_effect=DrivvoApiError("offline") if phase == "login" else None,
+                return_value="tok",
+            ),
+        ),
+        patch.object(DrivvoApiClient, "_get_json", get_json),
+    ):
+        assert not await hass.config_entries.async_setup(entry.entry_id)
+        await hass.async_block_till_done()
+    assert entry.state is ConfigEntryState.SETUP_RETRY
+    assert (DOMAIN, f"{VEHICLE_ID}_vehicle_non_existent") not in ir.async_get(
+        hass
+    ).issues
+    assert entry.entry_id not in hass.data.get(DOMAIN, {})
+
+    # The scheduled Home Assistant retry recovers and restores entities.
+    from datetime import timedelta
+    from homeassistant.util import dt as dt_util
+    from pytest_homeassistant_custom_component.common import async_fire_time_changed
+
+    with (
+        patch.object(DrivvoApiClient, "login", AsyncMock(return_value="tok")),
+        patch.object(DrivvoApiClient, "_get_json", _fake_get),
+    ):
+        freezer.tick(timedelta(seconds=10))
+        async_fire_time_changed(hass, dt_util.utcnow())
+        await hass.async_block_till_done(wait_background_tasks=True)
+    assert entry.state is ConfigEntryState.LOADED
+    assert hass.states.get("sensor.my_car_odometer_value") is not None
+
+
+async def test_confirmed_missing_vehicle_creates_repair(
+    hass, entry, enable_custom_integrations
+):
+    from homeassistant.helpers import issue_registry as ir
+
+    with (
+        patch.object(DrivvoApiClient, "login", AsyncMock(return_value="tok")),
+        patch.object(DrivvoApiClient, "get_vehicles", AsyncMock(return_value=[])),
+        patch.object(DrivvoApiClient, "get_vehicle", AsyncMock()) as get_vehicle,
+    ):
+        assert await hass.config_entries.async_setup(entry.entry_id)
+        await hass.async_block_till_done()
+    get_vehicle.assert_not_called()
+    assert (DOMAIN, f"{VEHICLE_ID}_vehicle_non_existent") in ir.async_get(hass).issues

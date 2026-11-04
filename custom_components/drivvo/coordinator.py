@@ -49,6 +49,8 @@ class DrivvoDataUpdateCoordinator(DataUpdateCoordinator[VehicleData]):
                 await self.client.login()
             except DrivvoAuthError as err:
                 raise ConfigEntryAuthFailed(str(err)) from err
+            except DrivvoApiError as err:
+                raise UpdateFailed(str(err)) from err
 
         try:
             return self._with_reminders(await self.client.get_vehicle(self.vehicle_id))
@@ -58,6 +60,8 @@ class DrivvoDataUpdateCoordinator(DataUpdateCoordinator[VehicleData]):
                 await self.client.login()
             except DrivvoAuthError as err:
                 raise ConfigEntryAuthFailed(str(err)) from err
+            except DrivvoApiError as err:
+                raise UpdateFailed(str(err)) from err
             try:
                 return self._with_reminders(
                     await self.client.get_vehicle(self.vehicle_id)
