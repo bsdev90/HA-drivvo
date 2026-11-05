@@ -1,4 +1,3 @@
-![hacs_badge](https://img.shields.io/badge/hacs-custom-orange.svg)
 [![hassfest](https://github.com/oOBenjaminOo/HA-drivvo/actions/workflows/hassfest.yaml/badge.svg)](https://github.com/oOBenjaminOo/HA-drivvo/actions/workflows/hassfest.yaml)
 [![HACS Action](https://github.com/oOBenjaminOo/HA-drivvo/actions/workflows/hacs.yaml/badge.svg)](https://github.com/oOBenjaminOo/HA-drivvo/actions/workflows/hacs.yaml)
 
@@ -11,8 +10,6 @@ Custom integration for the Home Assistant to obtain information present in [driv
 ## Maintained continuation / Reprise de maintenance
 
 Maintained by [Benjamin (@oOBenjaminOo)](https://github.com/oOBenjaminOo), based on upstream 3.1.0 by Hudson Brendon and contributors, including @dougiteixeira. The original MIT copyright and license are preserved in LICENSE. Upstream recovery commit: `24159f2dcf0462feb1dbc68caff8fda394b67a3d`.
-
-This repository is being prepared for HACS. **It is not currently included in the default HACS catalogue.** Add it as a custom Integration repository for testing.
 
 ### 3.1.1
 
@@ -46,16 +43,9 @@ Conserver l'entree Drivvo existante : ne pas la supprimer puis la recreer. Le do
 
 ### Installation via HACS
 
-Have HACS installed, this will allow you to update easily.
-
-Adding Drivvo to HACS can be using this button:
-
-[![image](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=oOBenjaminOo&repository=HA-drivvo&category=integration)
-
-If the button above doesn't work, add `https://github.com/oOBenjaminOo/HA-drivvo` as a custom repository of type Integration in HACS.
-
-- Click Install on the `Drivvo` integration.
-- Restart the Home Assistant.
+1. Open HACS in Home Assistant and search for **Drivvo**.
+2. Select **Drivvo** and click **Download**.
+3. Restart Home Assistant.
 
 ### Manual installation
 
