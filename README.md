@@ -11,6 +11,15 @@ Custom integration for the Home Assistant to obtain information present in [driv
 
 Maintained by [Benjamin (@oOBenjaminOo)](https://github.com/oOBenjaminOo), based on upstream 3.1.0 by Hudson Brendon and contributors, including @dougiteixeira. The original MIT copyright and license are preserved in LICENSE. Upstream recovery commit: `24159f2dcf0462feb1dbc68caff8fda394b67a3d`.
 
+### 3.1.2
+
+- Fix the Drivvo options dialog on current Home Assistant versions.
+- Let Home Assistant retry setup after a temporary Drivvo API failure. A missing-vehicle repair appears only when a successful vehicle-list response confirms the vehicle is absent.
+- Show a connection error during setup, reauthentication or configuration when Drivvo cannot be reached.
+- All 116 automated tests passed locally on Home Assistant 2026.10.4 / Python 3.14.
+
+[Release notes for 3.1.2](https://github.com/oOBenjaminOo/HA-drivvo/releases/tag/v3.1.2)
+
 ### 3.1.1
 
 - Correct remaining-fuel device classes to `volume_storage` / `energy_storage`; retain measurement statistics, entity IDs and units.
